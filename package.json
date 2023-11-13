@@ -1,11 +1,11 @@
 {
-	"name": "@syuilo/aiscript",
-	"version": "0.15.0",
-	"description": "AiScript implementation",
-	"author": "syuilo <syuilotan@yahoo.co.jp>",
+	"name": "@FineArchs/aiscript-f",
+	"version": "0.15.0.0",
+	"description": "AiScript implementation extended by FineArchs",
+	"author": "FineArchs <cicada1003@gmail.com>",
 	"license": "MIT",
-	"repository": "https://github.com/syuilo/aiscript.git",
-	"bugs": "https://github.com/syuilo/aiscript/issues",
+	"repository": "https://github.com/FineArchs/aiscript-f.git",
+	"bugs": "https://github.com/FineArchs/aiscript-f/issues",
 	"main": "./built/index.js",
 	"types": "./built/index.d.ts",
 	"scripts": {
