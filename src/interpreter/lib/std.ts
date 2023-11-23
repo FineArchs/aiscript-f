@@ -2,7 +2,7 @@
 import { v4 as uuid } from 'uuid';
 import seedrandom from 'seedrandom';
 import { NUM, STR, FN_NATIVE, FALSE, TRUE, ARR, NULL, BOOL, OBJ } from '../value.js';
-import { assertNumber, assertString, assertBoolean, valToJs, jsToVal, assertFunction, assertObject, eq, expectAny, assertArray, reprValue } from '../util.js';
+import { assertNumber, assertString, assertBoolean, valToJs, jsToVal, assertFunction, assertObject, eq, expectAny, assertArray } from '../util.js';
 import { RuntimeError } from '../../error.js';
 import type { Value } from '../value.js';
 
