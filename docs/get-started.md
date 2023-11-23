@@ -108,11 +108,10 @@ let arr = ["ai" "chan" "kawaii"]
 ```
 
 オブジェクトのプロパティにアクセスするときは、
-`.<name>`か`[<str>]`と書きます。
+`.<name>`と書きます。
 ```
-let obj = {foo: "bar", answer: 42}
+let obj = {foo: "bar"}
 <: obj.foo // "bar"
-<: obj["answer"] // 42
 ```
 
 ## 演算
