@@ -2361,17 +2361,6 @@ describe('Location', () => {
 	});
 });
 
-describe('Variable declaration', () => {
-	test.concurrent('Do not assign to let (issue #328)', async () => {
-		const err = await exe(`
-			let hoge = 33
-			hoge = 4
-		`).then(() => undefined).catch(err => err);
-
-		assert.ok(err instanceof AiScriptRuntimeError);
-	});
-})
-
 describe('primitive props', () => {
 	describe('num', () => {
 		test.concurrent('to_str', async () => {

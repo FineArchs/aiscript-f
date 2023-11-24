@@ -118,10 +118,6 @@ export class Scope {
 		for (const layer of this.layerdStates) {
 			if (layer.has(name)) {
 				const variable = layer.get(name)!;
-				if (!variable.isMutable) {
-					throw new AiScriptRuntimeError(`Cannot assign to an immutable variable ${name}.`);
-				}
-
 				variable.value = val;
 
 				this.log('assign', { var: name, val: val });
