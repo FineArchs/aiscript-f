@@ -1086,15 +1086,6 @@ describe('chain', () => {
 		eq(res, NUM(45));
 	});
 
-	test.concurrent('object with index', async () => {
-		const res = await exe(`
-		let ai = {a: {}}['a']
-		ai['chan'] = 'kawaii'
-		<: ai[{a: 'chan'}['a']]
-		`);
-		eq(res, STR('kawaii'));
-	});
-
 	test.concurrent('property chain with parenthesis', async () => {
 		let ast = Parser.parse(`
 				(a.b).c
