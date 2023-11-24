@@ -1,21 +1,5 @@
 [Read translated version (en)](./translations/en/CHANGELOG.md)
 
-# 0.16.0
-- **ネームスペースのトップレベルに`var`は定義できなくなりました。(`let`は可能)**
-- `Core:to_str`, `テンプレート文字列` でどの値でも文字列へ変換できるように
-- 指定時間待機する関数`Core:sleep`を追加
-- `exists 変数名` の構文で変数が存在するか判定できるように
-- オブジェクトを添字で参照できるように（`object['index']`のように）
-- 「エラー型（`error`）」を導入
-- `Json:parse`がパース失敗時にエラー型の値を返すように
-- `let` で定義した変数が上書きできてしまうのを修正
-- 関数`Str:from_codepoint` `Str#codepoint_at`を追加
-
-## For Hosts
-- **Breaking Change** AiScriptErrorのサブクラス４種にAiScript-の接頭辞を追加（例：SyntaxError→AiScriptSyntaxError）
-- Interpreterのコンストラクタの第２引数の要素に`err`（エラーコールバック）を設定できる。これは`Interpreter.exec`が失敗した時に加えて、**`Async:interval`や`Async:timeout`が失敗した場合にも呼び出される。** なお、これを設定した場合は例外throwは発生しなくなる。
-- ネイティブ関数は`opts.call`の代わりに`opts.topCall`を用いることで上記２つのようにエラーコールバックが呼び出されるように。**必要な場合にのみ使うこと。従来エラーキャッチ出来ていたケースでは引き続き`opts.call`を使う。**
-
 # 0.15.0
 - Mathを強化
 - `&&`, `||` 演算子の項が正しく変換されない可能性のあるバグを修正
