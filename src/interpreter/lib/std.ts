@@ -521,7 +521,7 @@ export const std: Record<string, Value> = {
 		}
 
 		const id = setInterval(() => {
-			opts.call(callback, []);
+			opts.topCall(callback, []);
 		}, interval.value);
 
 		const abortHandler = (): void => {
@@ -542,7 +542,7 @@ export const std: Record<string, Value> = {
 		assertFunction(callback);
 
 		const id = setTimeout(() => {
-			opts.call(callback, []);
+			opts.topCall(callback, []);
 		}, delay.value);
 
 		const abortHandler = (): void => {

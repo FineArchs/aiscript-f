@@ -1,5 +1,9 @@
 [Read translated version (en)](./translations/en/CHANGELOG.md)
 
+# 0.16.0(Cherry-picked)
+- For Host: Interpreterのコンストラクタの第２引数の要素に`err`（エラーコールバック）を設定できる。これは`Interpreter.exec`が失敗した時に加えて、**`Async:interval`や`Async:timeout`が失敗した場合にも呼び出される。** なお、これを設定した場合は例外throwは発生しなくなる。
+- For Host: ネイティブ関数は`opts.call`の代わりに`opts.topCall`を用いることで上記２つのようにエラーコールバックが呼び出されるように。**必要な場合にのみ使うこと。従来エラーキャッチ出来ていたケースでは引き続き`opts.call`を使う。**
+
 # 0.15.0
 - Mathを強化
 - `&&`, `||` 演算子の項が正しく変換されない可能性のあるバグを修正
