@@ -1832,18 +1832,31 @@ describe('namespace', () => {
 		eq(res, STR('kawaii'));
 	});
 
-	test.concurrent('cannot declare mutable variable', async () => {
-		try {
-			await exe(`
-			:: Foo {
-				var ai = "kawaii"
-			}
-			`);
-		} catch (e) {
-			assert.ok(true);
-			return;
+	test.concurrent('assign variable', async () => {
+		const res = await exe(`
+		Foo:setMsg("hello")
+		<: Foo:getMsg()
+
+		:: Foo {
+			var msg = "ai"
+			@setMsg(value) { Foo:msg = value }
+			@getMsg() { Foo:msg }
 		}
-		assert.fail();
+		`);
+		eq(res, STR('hello'));
+	});
+
+	test.concurrent('increment', async () => {
+		const res = await exe(`
+		Foo:value += 10
+		Foo:value -= 5
+		<: Foo:value
+
+		:: Foo {
+			var value = 0
+		}
+		`);
+		eq(res, NUM(5));
 	});
 });
 
