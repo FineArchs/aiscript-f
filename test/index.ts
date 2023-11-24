@@ -2862,10 +2862,10 @@ describe('std', () => {
 	});
 
 	describe('Error', () => {
-		test.concurrent('create', async () => {
+		test.concurrent('new', async () => {
 			eq(
 				await exe(`
-				<: Error:create('ai', {chan: 'kawaii'})
+				<: Error:new('ai', {chan: 'kawaii'})
 				`),
 				ERROR('ai', OBJ(new Map([['chan', STR('kawaii')]])))
 			);

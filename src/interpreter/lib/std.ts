@@ -527,7 +527,7 @@ export const std: Record<string, Value> = {
 	//#endregion
 	
 	//#region Error
-	'Error:create': FN_NATIVE(([name, info]) => {
+	'Error:new': FN_NATIVE(([name, info]) => {
 		assertString(name);
 		return ERROR(name.value, info);
 	}),
