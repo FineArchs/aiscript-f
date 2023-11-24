@@ -1,8 +1,5 @@
 [Read translated version (en)](./translations/en/CHANGELOG.md)
 
-# 0.17.0
-- `package.json`を修正
-
 # 0.16.0
 - **ネームスペースのトップレベルに`var`は定義できなくなりました。(`let`は可能)**
 - `Core:to_str`, `テンプレート文字列` でどの値でも文字列へ変換できるように
