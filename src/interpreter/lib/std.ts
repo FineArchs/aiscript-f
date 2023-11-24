@@ -517,11 +517,13 @@ export const std: Record<string, Value> = {
 		return OBJ(new Map(obj.value));
 	}),
 
+	/* TODO
 	'Obj:merge': FN_NATIVE(([a, b]) => {
 		assertObject(a);
 		assertObject(b);
-		return OBJ(new Map([...a.value, ...b.value]));
+		return OBJ();
 	}),
+	*/
 	//#endregion
 	
 	//#region Error

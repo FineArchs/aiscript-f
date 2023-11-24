@@ -2831,16 +2831,6 @@ describe('std', () => {
 				ARR([STR('c'), NUM(3)])
 			]));
 		});
-
-		test.concurrent('merge', async () => {
-			const res = await exe(`
-			let o1 = { a: 1; b: 2; }
-			let o2 = { b: 3; c: 4; }
-
-			<: Obj:merge(o1, o2)
-			`);
-			eq(res, utils.jsToVal({ a: 1, b: 3, c: 4}));
-		});
 	});
 
 	describe('Str', () => {
