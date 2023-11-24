@@ -2,9 +2,9 @@ import { substring, length, indexOf, toArray } from 'stringz';
 import { AiScriptRuntimeError } from '../error.js';
 import { assertArray, assertBoolean, assertFunction, assertNumber, assertString, expectAny } from './util.js';
 import { ARR, FALSE, FN_NATIVE, NULL, NUM, STR, TRUE } from './value.js';
-import type { Value, VArr, VFn, VNum, VStr, VError } from './value.js';
+import type { Value, VArr, VFn, VNum, VStr } from './value.js';
 
-type VWithPP = VNum|VStr|VArr|VError;
+type VWithPP = VNum|VStr|VArr;
 
 const PRIMITIVE_PROPS: {
 	[key in VWithPP['type']]: { [key: string]: (target: Value) => Value }
@@ -220,12 +220,6 @@ const PRIMITIVE_PROPS: {
 			target.value = await mergeSort(target.value, comp);
 			return target;
 		}),
-	},
-
-	error: {
-		name: (target: VError): VStr => STR(target.value), 
-
-		info: (target: VError): Value => target.info ?? NULL,
 	},
 } as const;
 

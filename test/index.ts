@@ -5,7 +5,7 @@
 
 import * as assert from 'assert';
 import { Parser, Interpreter, utils, errors, Ast } from '../src';
-import { NUM, STR, NULL, ARR, OBJ, BOOL, TRUE, FALSE, ERROR ,FN_NATIVE } from '../src/interpreter/value';
+import { NUM, STR, NULL, ARR, OBJ, BOOL, TRUE, FALSE, FN_NATIVE } from '../src/interpreter/value';
 let { AiScriptRuntimeError, AiScriptIndexOutOfRangeError } = errors;
 
 const exe = (program: string): Promise<any> => new Promise((ok, err) => {
@@ -2873,33 +2873,32 @@ describe('std', () => {
 
 		test.concurrent('parsable', async () => {
 			[
-				'null',
-				'"hoge"',
-				'[]',
-				'{}',
-			].forEach(async (str) => {
-				const res = await exe(`
-					<: [
-						Json:parsable('${str}')
-						Json:stringify(Json:parse('${str}'))
-					]
-				`);
-				eq(res, ARR([TRUE, STR(str)]));
-			});
-		});
-		test.concurrent('unparsable', async () => {
-			[
 				'',
+				'null',
 				'hoge',
+				'"hoge"',
 				'[',
+				'[]',
+				'{}'
 			].forEach(async (str) => {
 				const res = await exe(`
-					<: [
-						Json:parsable('${str}')
-						Json:parse('${str}')
-					]
+					<: Json:parsable('${str}')
 				`);
-				eq(res, ARR([FALSE, ERROR('not_json')]));
+				assert.deepEqual(res.type, 'bool');
+				if (res.value) {
+					await exe(`
+						<: Json:parse('${str}')
+					`);
+				} else {
+					try {
+						await exe(`
+							<: Json:parse('${str}')
+						`);
+					} catch (e) {
+						if (e instanceof SyntaxError) return;
+					}
+					assert.fail()
+				}
 			});
 		});
 	});

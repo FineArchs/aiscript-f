@@ -47,10 +47,10 @@ AiScriptのバージョンです。
 JSONを生成します。  
 
 ### @Json:parse(_json_: str): value
-JSONをパースします。 引数がJSONとしてパース可能性でない場合、エラー型の値（`name`=`'not_json'`）を返します。 
+JSONをパースします。  
 
 ### @Json:parsable(_str_: str): bool
-文字列がJSONとしてパース可能であるかの判定を行います。歴史的理由により存在しています 
+文字列がJSONとしてパース可能であるかの判定を行います。 
 
 ## :: Date
 

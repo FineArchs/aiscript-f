@@ -1,7 +1,7 @@
 /* eslint-disable no-empty-pattern */
 import { v4 as uuid } from 'uuid';
 import seedrandom from 'seedrandom';
-import { NUM, STR, FN_NATIVE, FALSE, TRUE, ARR, NULL, BOOL, OBJ, ERROR } from '../value.js';
+import { NUM, STR, FN_NATIVE, FALSE, TRUE, ARR, NULL, BOOL, OBJ } from '../value.js';
 import { assertNumber, assertString, assertBoolean, valToJs, jsToVal, assertFunction, assertObject, eq, expectAny, assertArray, reprValue } from '../util.js';
 import { AiScriptRuntimeError } from '../../error.js';
 import type { Value } from '../value.js';
@@ -152,11 +152,7 @@ export const std: Record<string, Value> = {
 
 	'Json:parse': FN_NATIVE(([json]) => {
 		assertString(json);
-		try {
-			return jsToVal(JSON.parse(json.value));
-		} catch (e) {
-			return ERROR('not_json');
-		}
+		return jsToVal(JSON.parse(json.value));
 	}),
 
 	'Json:parsable': FN_NATIVE(([str]) => {
