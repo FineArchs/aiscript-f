@@ -131,11 +131,6 @@ export const std: Record<string, Value> = {
 			return ARR([a]);
 		}
 	}),
-	'Core:sleep': FN_NATIVE(async ([delay]) => {
-		assertNumber(delay);
-		await new Promise((r) => setTimeout(r, delay.value));
-		return NULL;
-	}),
 	//#endregion
 
 	//#region Util
