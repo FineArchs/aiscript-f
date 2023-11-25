@@ -2831,6 +2831,19 @@ describe('std', () => {
 				ARR([STR('c'), NUM(3)])
 			]));
 		});
+
+		test.concurrent('merge', () => {
+			exe(`
+			let o1 = { a: 1; b: 2; }
+			let o2 = { b: 3; c: 4; }
+
+			<: Obj:merge(o1, o2)
+			`).then(() => {
+				assert.fail('Obj:merge should not exist yet');
+			}, (e) => {
+				if (!(e instanceof AiScriptRuntimeError)) throw e;
+			});
+		});
 	});
 
 	describe('Str', () => {
@@ -2858,6 +2871,18 @@ describe('std', () => {
 			<: "".codepoint_at(0)
 			`);
 			eq(res, NULL);
+		});
+	});
+
+	describe('Error', () => {
+		test.concurrent('create', () => {
+			exe(`
+			<: Error:create('ai', {chan: 'kawaii'})
+			`).then(() => {
+				assert.fail('Error:create should not exist yet');
+			}, (e) => {
+				if (!(e instanceof AiScriptRuntimeError)) throw e;
+			});
 		});
 	});
 
