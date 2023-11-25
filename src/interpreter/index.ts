@@ -6,7 +6,7 @@ import { autobind } from '../utils/mini-autobind.js';
 import { AiScriptError, NonAiScriptError, AiScriptIndexOutOfRangeError, AiScriptRuntimeError } from '../error.js';
 import { Scope } from './scope.js';
 import { std } from './lib/std.js';
-import { assertNumber, assertString, assertFunction, assertBoolean, assertObject, assertArray, eq, isObject, isArray, expectAny, reprValue } from './util.js';
+import { assertNumber, assertString, assertFunction, assertBoolean, assertObject, assertArray, eq, isObject, isArray, expectAny } from './util.js';
 import { NULL, RETURN, unWrapRet, FN_NATIVE, BOOL, NUM, STR, ARR, OBJ, FN, BREAK, CONTINUE, ERROR } from './value.js';
 import { getPrimProp } from './primitive-props.js';
 import { Variable } from './variable.js';
@@ -477,8 +477,12 @@ export class Interpreter {
 					if (typeof x === 'string') {
 						str += x;
 					} else {
+						// TODO: Core:to_strと処理を共通化する
 						const v = await this._eval(x, scope);
-						str += reprValue(v);
+						let text = '';
+						if (v.type === 'str') text = v.value;
+						else if (v.type === 'num') text = v.value.toString();
+						str += text;
 					}
 				}
 				return STR(str);
