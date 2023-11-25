@@ -19,7 +19,6 @@ const reservedWord = [
 	'eval',
 	'var',
 	'let',
-	'exists',
 
 	// future
 	'fn',

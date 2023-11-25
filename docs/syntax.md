@@ -249,12 +249,3 @@ let y = match x {
 }
 <: y // "yes"
 ```
-
-### exists
-与えられた名称の変数または関数が存在すればtrue、しなければfalseを返します。
-```js
-// 変数barは存在しないためfalse
-var foo = exists bar
-// 変数fooが存在するためtrue
-var bar = exists foo
-```

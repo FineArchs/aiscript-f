@@ -35,7 +35,6 @@ export type Expression =
 	Fn |
 	Match |
 	Block |
-	Exists |
 	Tmpl |
 	Str |
 	Num |
@@ -52,7 +51,7 @@ export type Expression =
 	Prop;
 
 const expressionTypes = [
-	'if', 'fn', 'match', 'block', 'exists', 'tmpl', 'str', 'num', 'bool', 'null', 'obj', 'arr', 'identifier', 'call', 'index', 'prop',
+	'if', 'fn', 'match', 'block', 'tmpl', 'str', 'num', 'bool', 'null', 'obj', 'arr', 'identifier', 'call', 'index', 'prop',
 ];
 export function isExpression(x: Node): x is Expression {
 	return expressionTypes.includes(x.type);
@@ -195,11 +194,6 @@ export type Match = NodeBase & {
 export type Block = NodeBase & {
 	type: 'block'; // ブロックまたはeval式
 	statements: (Statement | Expression)[]; // 処理
-};
-
-export type Exists = NodeBase & {
-	type: 'exists'; // 変数の存在判定
-	identifier: Identifier; // 変数名
 };
 
 export type Tmpl = NodeBase & {
