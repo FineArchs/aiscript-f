@@ -307,13 +307,7 @@ Not
 
 Chain
 	= e:Expr3 chain:(CallChain / IndexChain / PropChain)+
-{
-	if (e.chain) {
-		return { ...e, chain: [...e.chain, ...chain] };
-	} else {
-		return { ...e, chain };
-	}
-}
+{ return { ...e, chain }; }
 
 CallChain
 	= "(" _* args:CallArgs? _* ")"

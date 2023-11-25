@@ -1093,12 +1093,11 @@ describe('chain', () => {
 		const line = ast[0];
 		if (
 			line.type !== 'prop' ||
-			line.target.type !== 'prop' ||
-			line.target.target.type !== 'identifier'
+			line.target.type !== 'identifier' ||
+			line.target.target !== undefined
 		)
 			assert.fail();
-		assert.equal(line.target.target.name, 'a');
-		assert.equal(line.target.name, 'b');
+		assert.equal(line.target.name, 'a');
 		assert.equal(line.name, 'c');
 	});
 
@@ -1109,13 +1108,12 @@ describe('chain', () => {
 		const line = ast[0];
 		if (
 			line.type !== 'prop' ||
-			line.target.type !== 'index' ||
-			line.target.target.type !== 'identifier' ||
-			line.target.index.type !== 'num'
+			line.target.type !== 'identifier' ||
+			line.target.target !== undefined ||
+			line.target.index !== undefined
 		)
 			assert.fail();
-		assert.equal(line.target.target.name, 'a');
-		assert.equal(line.target.index.value, 42);
+		assert.equal(line.target.name, 'a');
 		assert.equal(line.name, 'b');
 	});
 
@@ -1126,16 +1124,12 @@ describe('chain', () => {
 		const line = ast[0];
 		if (
 			line.type !== 'prop' ||
-			line.target.type !== 'call' ||
-			line.target.target.type !== 'identifier' ||
-			line.target.args.length !== 2 ||
-			line.target.args[0].type !== 'num' ||
-			line.target.args[1].type !== 'num'
+			line.target.type !== 'identifier' ||
+			line.target.target !== undefined ||
+			line.target.args !== undefined
 		)
 			assert.fail();
-		assert.equal(line.target.target.name, 'foo');
-		assert.equal(line.target.args[0].value, 42);
-		assert.equal(line.target.args[1].value, 57);
+		assert.equal(line.target.name, 'foo');
 		assert.equal(line.name, 'bar');
 	});
 
@@ -1147,14 +1141,11 @@ describe('chain', () => {
 		if (
 			line.type !== 'prop' ||
 			line.target.type !== 'prop' ||
-			line.target.target.type !== 'prop' ||
-			line.target.target.target.type !== 'prop' ||
-			line.target.target.target.target.type !== 'identifier'
+			line.target.target.type !== 'identifier' ||
+			line.target.target.target !== undefined
 		)
 			assert.fail();
-		assert.equal(line.target.target.target.target.name, 'a');
-		assert.equal(line.target.target.target.name, 'b');
-		assert.equal(line.target.target.name, 'c');
+		assert.equal(line.target.target.name, 'a');
 		assert.equal(line.target.name, 'd');
 		assert.equal(line.name, 'e');
 	});
@@ -2793,6 +2784,19 @@ describe('std', () => {
 				ARR([STR('c'), NUM(3)])
 			]));
 		});
+
+		test.concurrent('merge', () => {
+			exe(`
+			let o1 = { a: 1; b: 2; }
+			let o2 = { b: 3; c: 4; }
+
+			<: Obj:merge(o1, o2)
+			`).then(() => {
+				assert.fail('Obj:merge should not exist yet');
+			}, (e) => {
+				if (!(e instanceof AiScriptRuntimeError)) throw e;
+			});
+		});
 	});
 
 	describe('Str', () => {
@@ -2801,6 +2805,18 @@ describe('std', () => {
 			<: Str:lf
 			`);
 			eq(res, STR('\n'));
+		});
+	});
+
+	describe('Error', () => {
+		test.concurrent('create', () => {
+			exe(`
+			<: Error:create('ai', {chan: 'kawaii'})
+			`).then(() => {
+				assert.fail('Error:create should not exist yet');
+			}, (e) => {
+				if (!(e instanceof AiScriptRuntimeError)) throw e;
+			});
 		});
 	});
 
